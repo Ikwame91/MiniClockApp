@@ -52,7 +52,9 @@ class _HomeState extends State<Home> {
                         };
                       });
                     } else {
-                      print('No result from /location');
+                      if (kDebugMode) {
+                        print('No result from /location');
+                      }
                     }
                   },
                   icon: Icon(
