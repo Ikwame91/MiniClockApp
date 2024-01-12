@@ -42,14 +42,18 @@ class _HomeState extends State<Home> {
                   onPressed: () async {
                     dynamic result =
                         await Navigator.pushNamed(context, '/location');
-                    setState(() {
-                      data = {
-                        'time': result['time'],
-                        'location': result['location'],
-                        'isDaytime': result['isDaytime'],
-                        'flag': result['flag']
-                      };
-                    });
+                    if (result != null) {
+                      setState(() {
+                        data = {
+                          'time': result['time']!,
+                          'location': result['location']!,
+                          'isDaytime': result['isDaytime']!,
+                          'flag': result['flag']!
+                        };
+                      });
+                    } else {
+                      print('No result from /location');
+                    }
                   },
                   icon: Icon(
                     Icons.edit_location,
@@ -91,3 +95,27 @@ class _HomeState extends State<Home> {
   }
 }
 
+
+
+// Navigating to a new screen with arguments
+// Navigator.pushNamed(
+//   context,
+//   '/secondScreen',
+//   arguments: {'id': 1, 'name': 'Example'},
+// );
+
+// // In the new screen
+// class SecondScreen extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     final args = ModalRoute.of(context)!.settings.arguments as Map;
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Second Screen'),
+//       ),
+//       body: Center(
+//         child: Text('Id: ${args['id']}, Name: ${args['name']}'),
+//       ),
+//     );
+//   }
+// }
